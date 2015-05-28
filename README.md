@@ -67,9 +67,9 @@ vif_plugging_timeout: 0
 ```
 
 
-II. Upgrade thanh phan
+###II. Upgrade thanh phan
 
-1. Upgrade neutron tren node Network
+####1. Upgrade neutron tren node Network
 
 ```sh
 apt-get -y install ubuntu-cloud-keyring
