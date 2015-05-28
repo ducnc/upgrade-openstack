@@ -36,10 +36,9 @@ apt-get install apt-show-versions
 apt-show-versions neutron-plugin-ml2 neutron-plugin-openvswitch-agent neutron-l3-agent neutron-dhcp-agent
 ```
 
-I. Upgare toan bo node Controller
+###I. Upgare toan bo node Controller
 
-
-1. Cách thức thực hiện
+####1. Cách thức thực hiện
 
 - Dựng Controller mới theo script Juno, chú ý để IP khác IP của controller cũ, sử dụng hostname (controller, network,...) khi khai báo endpoint, database,... không sử dụng IP
 
@@ -49,7 +48,7 @@ I. Upgare toan bo node Controller
 
 - Sau khi thực hiện xong, đổi IP thành IP của controller cũ, shutdown controller cũ
 
-2. Các bước thực hiện (Upgare Controller từ IceHouse lên Juno)
+####2. Các bước thực hiện (Upgare Controller từ IceHouse lên Juno)
 
 - Thực hiện các script trong juno-ubuntu14.04 cho Controller mới
 
@@ -58,6 +57,14 @@ I. Upgare toan bo node Controller
 - Thực hiện script new_controller.sh trên Controller mới, shutdown controller cũ, sau đó đổi IP thành Controller cũ
 
 - Restart nova-compute trên node Compute
+
+**NOTE:** Sau khi Upgrade nếu gặp tình trạng khi tạo máy ảo mới mà trạng thái cứ hiện là `spawning` rất lâu, sau khoảng 5 phút thì báo lỗi thì sửa như sau:
+
+- Thêm vào [DEFAULT] section tại `nova.conf` trên compute node hai dòng:
+```sh 
+vif_plugging_is_fatal: false
+vif_plugging_timeout: 0
+```
 
 
 II. Upgrade thanh phan
@@ -77,10 +84,3 @@ service neutron-dhcp-agent restart
 service neutron-metadata-agent restart
 ```
 
-Sau khi Upgrade nếu khi tạo máy ảo mới mà trạng thái cứ hiện là `spawning` rất lâu, sau khoảng 5 phút thì báo lỗi thì sửa như sau:
-
-- Thêm vào `nova.conf` trên compute node hai dòng:
-```sh 
-vif_plugging_is_fatal: false
-vif_plugging_timeout: 0
-```
