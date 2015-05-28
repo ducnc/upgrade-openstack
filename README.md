@@ -76,3 +76,11 @@ service neutron-l3-agent restart
 service neutron-dhcp-agent restart
 service neutron-metadata-agent restart
 ```
+
+Sau khi Upgrade nếu khi tạo máy ảo mới mà trạng thái cứ hiện là `spawning` rất lâu, sau khoảng 5 phút thì báo lỗi thì sửa như sau:
+
+- Thêm vào `nova.conf` trên compute node hai dòng:
+```sh 
+vif_plugging_is_fatal: false
+vif_plugging_timeout: 0
+```
